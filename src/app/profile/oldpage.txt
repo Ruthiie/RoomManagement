@@ -1,0 +1,176 @@
+"use client"
+
+import { useState } from "react"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Checkbox } from "@/components/ui/checkbox"
+import { Card, CardContent } from "@/components/ui/card"
+import { Separator } from "@/components/ui/separator"
+import { Pencil, FileText } from "lucide-react"
+import { profileData } from "@/data/profileData"
+
+
+
+export default function RoomManagement() {
+  const [searchUnassigned, setSearchUnassigned] = useState("")
+  const [searchRooms, setSearchRooms] = useState("")
+
+  return (
+    <div className="p-6 font-lexend">
+      <h1 className="text-2xl font-bold">Room Management</h1>
+      <Separator className="my-4 bg-gray-300" />
+
+      {/* Unassigned Residents */}
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="text-lg font-medium">
+          Unassigned Residents{" "}
+        </h2>
+        <div className="flex gap-2">
+          <Input
+            placeholder="Name"
+            value={searchUnassigned}
+            onChange={(e) => setSearchUnassigned(e.target.value)}
+            className="w-48"
+          />
+          <Button variant="outline" className="bg-white border border-gray-300 text-gray-700 hover:bg-gray-100">
+            Bulk Assign
+          </Button>
+          <Button className="bg-[#01889f] hover:bg-[#016d80] text-white">
+            Filter
+          </Button>
+        </div>
+      </div>
+
+      <div className="space-y-3 mb-8">
+        {[1, 2].map((i) => (
+          <Card key={i} className="border border-gray-200 shadow-sm">
+            <CardContent className="flex items-center justify-between p-4">
+              <div className="flex items-start gap-3">
+                <Checkbox id={`resident-${i}`} />
+                <div>
+                  <p className="font-medium">Elene E. Doyle</p>
+                  <p className="text-sm text-gray-500">
+                    Previous Room : Full Care - {i === 1 ? "Single" : "Shared"} Bedroom |{" "}
+                    {i === 1 ? "Male" : "Female"} | &lt;Marital Status&gt;
+                  </p>
+                </div>
+              </div>
+              <div className="flex gap-2">
+                <Button variant="outline" className="bg-gray-200 text-gray-700 hover:bg-gray-300">
+                  <FileText size={18} />
+                </Button>
+                <Button className="bg-[#01889f] hover:bg-[#016d80] text-white">
+                  Assign
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
+      {/* Rooms */}
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="text-lg font-semibold">Rooms</h2>
+        <div className="flex gap-2">
+          <Input
+            placeholder="Room ID"
+            value={searchRooms}
+            onChange={(e) => setSearchRooms(e.target.value)}
+            className="w-48"
+          />
+          <Button className="bg-[#01889f] hover:bg-[#016d80] text-white">
+            Filter
+          </Button>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-3 gap-4 mb-6">
+        <Card className="p-4 text-center">
+          <p className="text-sm text-gray-500">Number of Rooms</p>
+          <p className="text-xl font-bold">10</p>
+        </Card>
+        <Card className="p-4 text-center">
+          <p className="text-sm text-gray-500">Total Active Residents</p>
+          <p className="text-xl font-bold">15</p>
+        </Card>
+        <Card className="p-4 text-center">
+          <p className="text-sm text-gray-500">Vacancies</p>
+          <p className="text-xl font-bold text-red-600">2</p>
+        </Card>
+      </div>
+
+      <div className="mt-6 border border-gray-200 rounded-lg overflow-hidden shadow-sm">
+        <table className="w-full text-left border-collapse">
+          <thead className="bg-[#e6f4f7]">
+            <tr>
+              <th className="text-left p-2">Room ID</th>
+              <th className="text-left p-2">Room Type</th>
+              <th className="text-left p-2">Room Name</th>
+              <th className="text-left p-2">Occupants</th>
+              <th className="text-left p-2">Capacity</th>
+              <th className="text-left p-2">Tariff</th>
+              <th className="text-left p-2">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {[
+              {
+                id: "R-1235",
+                type: "Full Care",
+                name: "Single Bedroom",
+                occupants: "Alex Johnson",
+                capacity: "1/1",
+                tariff: "R9,250",
+              },
+              {
+                id: "R-1231",
+                type: "Full Care",
+                name: "Four Bedroom",
+                occupants: (
+                  <>
+                    Alex Johnson<br />
+                    Jordan Smith<br />
+                    Taylor Brown<br />
+                    <span className="text-red-600">Empty</span>
+                  </>
+                ),
+                capacity: "3/4",
+                tariff: "R9,250",
+              },
+              {
+                id: "R-1312",
+                type: "Dementia",
+                name: "Single Bedroom",
+                occupants: "Robert Lewandowski",
+                capacity: "1/1",
+                tariff: "R9,250",
+              },
+              {
+                id: "R-1312",
+                type: "Dementia",
+                name: "Single Bedroom",
+                occupants: <span className="text-red-600">Empty</span>,
+                capacity: "0/1",
+                tariff: "R9,250",
+              },
+            ].map((room, i) => (
+              <tr key={i} className="border-t">
+                <td className="p-2">{room.id}</td>
+                <td className="p-2">{room.type}</td>
+                <td className="p-2">{room.name}</td>
+                <td className="p-2">{room.occupants}</td>
+                <td className="p-2">{room.capacity}</td>
+                <td className="p-2">{room.tariff}</td>
+                <td className="p-2">
+                  <Button className="bg-[#01889f] hover:bg-[#016d80] text-white">
+                    <Pencil size={18} />
+                  </Button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  )
+}
