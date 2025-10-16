@@ -1,0 +1,30 @@
+[
+    {
+      "id": "res-1",
+      "name": "Elene E. Doyle",
+      "previousRoom": "Full Care - Single Bedroom",
+      "gender": "Female",
+      "maritalStatus": "Married",
+      "assigned": false,
+      "roomId": null
+    },
+    {
+      "id": "res-2",
+      "name": "Jordan Smith",
+      "previousRoom": "Full Care - Shared Bedroom",
+      "gender": "Male",
+      "maritalStatus": "Single",
+      "assigned": false,
+      "roomId": null
+    },
+    {
+      "id": "res-3",
+      "name": "Taylor Brown",
+      "previousRoom": "Full Care - Shared Bedroom",
+      "gender": "Female",
+      "maritalStatus": "Single",
+      "assigned": false,
+      "roomId": null
+    }
+  ]
+  
